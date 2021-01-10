@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { ThemeProvider } from "./context/theme";
 import Nav from "./components/Nav";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Loading from "./components/Loading";
 
 const Popular = React.lazy(() => import("./components/Popular"));
@@ -15,17 +15,17 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      theme: 'light',
+      theme: "light",
       toggleTheme: () => {
-        this.setState(({theme}) => ({
-          theme: theme === 'light' ? 'dark' : 'light'
-        }))
-      }
-    }
+        this.setState(({ theme }) => ({
+          theme: theme === "light" ? "dark" : "light",
+        }));
+      },
+    };
   }
   render() {
     return (
-      <Router>    
+      <Router>
         <ThemeProvider value={this.state}>
           <div className={this.state.theme}>
             <div className="container">
@@ -35,10 +35,11 @@ class App extends React.Component {
                   <Route exact path="/" component={Popular} />
                   <Route exact path="/battle" component={Battle} />
                   <Route path="/battle/results" component={Results} />
-                  <Route render={()=> <h1 className="row center-text">404</h1>} />
+                  <Route
+                    render={() => <h1 className="row center-text">404</h1>}
+                  />
                 </Switch>
               </React.Suspense>
-              
             </div>
           </div>
         </ThemeProvider>
